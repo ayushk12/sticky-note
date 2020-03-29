@@ -1,0 +1,8 @@
+body {
+}
+
+a.ui.card.card__frame {
+    overflow: hidden;
+    height: 18rem;
+    text-align: justify;
+}
