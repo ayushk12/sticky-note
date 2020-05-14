@@ -14,3 +14,5 @@
  npm start
  ```
  
+# hosting link 
+https://sticky-12.netlify.app/
