@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from "react";
-import { Card, Grid, Sticky, Button, Image } from "semantic-ui-react";
+import React, { Component } from "react";
+import { Card, Grid, Button, Image } from "semantic-ui-react";
+import ColorPicker from "./ColorPicker";
 import Moment from "react-moment";
 
 import noteService from "../services/noteService";
@@ -10,20 +11,20 @@ const colorTheme = [
   { color: "orange" },
   { color: "violet" },
   { color: "#34eb80" },
-  { color: "#34d3eb" }
+  { color: "#34d3eb" },
 ];
 
 const len = colorTheme.length;
 
 class Home extends Component {
   state = {
-    notes: []
+    notes: [],
   };
 
-  editNote = note => {
+  editNote = (note) => {
     this.props.history.push({
       pathname: "/editNote",
-      state: { note }
+      state: { note },
     });
   };
 
@@ -33,7 +34,7 @@ class Home extends Component {
 
   deleteNote = async (event, note) => {
     event.stopPropagation();
-    const notes = this.state.notes.filter(n => n._id !== note._id);
+    const notes = this.state.notes.filter((n) => n._id !== note._id);
     this.setState({ notes: [...notes] });
 
     const data = await noteService.deleteNote(note);
@@ -43,18 +44,18 @@ class Home extends Component {
     const notes = await noteService.getNotes();
     console.log("data", notes.data);
     this.setState({
-      notes: [...this.state.notes, ...notes.data]
+      notes: [...this.state.notes, ...notes.data],
     });
   }
 
-  renderNotesCard = notes => {
+  renderNotesCard = (notes) => {
     return notes.map((note, i) => {
       return (
         <Grid.Column key={note._id}>
           <Card
             style={{
               margin: "20px 0px",
-              background: `${colorTheme[i % len].color}`
+              background: `${colorTheme[i % len].color}`,
             }}
             className="card__frame"
             onClick={() => this.editNote(note)}
@@ -73,7 +74,7 @@ class Home extends Component {
                 color="red"
                 floated="right"
                 icon="close"
-                onClick={e => this.deleteNote(e, note)}
+                onClick={(e) => this.deleteNote(e, note)}
               />
               <Card.Header>{note.title}</Card.Header>
               <Card.Meta>
